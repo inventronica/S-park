@@ -1,5 +1,5 @@
 # S-Park
-![banner](../master/extra/banner.png)
+![banner](../master/extra/banner.jpg)
 #### Acest repository de Github reprezintă prezentarea conceptului și a robotului S-Park, al cărui scop este de a rezolva problema locurilor de parcare din orașele aglomerate, care au deja o infrastructură stabilită, și unde este mult mai complicată construirea de clădiri noi, cu scopul adăpostirii autovehiculelor.
 ## Cuprins:
 - [Argument - Utilitate practică](#argument---utilitate-practică)
