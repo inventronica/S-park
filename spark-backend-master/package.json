@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/mitelsoft/subparking-server.git"
+    "url": "git+ssh://git@github.com:inventronica/S-park.git"
   },
   "author": "mitel",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/mitelsoft/subparking-server#readme",
+  "homepage": "git@github.com:inventronica/S-park.git#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",

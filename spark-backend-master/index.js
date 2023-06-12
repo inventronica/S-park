@@ -12,13 +12,13 @@ const wss = new WebSocket.Server({ server });
 
 
 let parked = {}
-let spots = [0, 1, 1, 0, 1, 0, 1, 1]
+let spots = [0, 1, 1, 0, 1, 0, 1, 1] // counter-clockwise
 let socks = []
 let crtSpot = 0;
 
 let resetApp = ()=>{
     parked = {}
-    spots = [0, 1, 1, 0, 1, 0, 1, 1]
+    spots = [0, 1, 1, 0, 1, 0, 1, 1] 
     crtSpot = 0;
 }
 
