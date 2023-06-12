@@ -33,7 +33,7 @@
 #define PIN_EN1 23
 #define PIN_EN2 22
 
-#define ESP_INTR_FLAG_DEFAULT 0 //no ideea what is this
+#define ESP_INTR_FLAG_DEFAULT 0 
 
 #define MINSPEED 5
 #define MAXSPEED 99
@@ -81,7 +81,7 @@ void rfid_task(void *pvParameter)
     MFRC522_Init(PIN_NUM_RST, PIN_NUM_CS); // Init MFRC522
     printf("done\n");
     uint8_t CardID[30];
-    while (1)
+    while (true)
     {
         if (MFRC522_Check(CardID) == MI_OK)
         {

@@ -49,15 +49,48 @@ Server-ul va putea accesa oricând informațiile despre parcare și starea acest
 
 ## Partea electrică
 
-Pentru partea electrică
+Pentru partea electrică am utilizat elementele prezentate în schema de mai jos:
 
 ![electrical_scheme](../master/spark-embedded-master/electrica.png)
 
+În continuare, luăm în considerare și server-ul cu care microcontroller-ul comunică, și la care este conectat prin Wi-Fi.
+
+Folosim encoder-ul magnetic pentru a determina cât de mult s-a învârtit motorul, astfel, putem calcula distanța dintre locurile de parcare și să îi spunem motorului precis cât de tare să se învârtă.
+
 ## Avantaje
-Server
 
- → Utilizator → Administrator →Comunicarea cu alte parcari
+Conceptul prezentat de noi oferă o mulțime de avantaje, printre care se numără:
 
-## Partea de cod
+1. **Prețul redus al unui loc de parcare**. În mod normal, costul unui loc de parcare în subteran începe de la 23.000€, însă un spațiu în parcarea noastră costă doar 15.000-18.000€, un preț mult mai avantajos
+2. **Confortul vizual și integrarea aproape inobservabilă a parcării**. Datorită conceptului de parcare tip carusel, parcarea noastră se comportă ca un lift subteran, partea supraterană fiind mult mai redusă ca dimensiune, astfel, aceasta poate fi integrată oriunde, în orice stil arhitectural.
+3. **Conceptul dezvoltat în prezent poate fi integrat pentru mai multe pracări**. Cu siguranță vor exista mai multe parcări de acest gen, de aceea noi am scris codul în așa fel încât există posibilitatea din aplicația web să se aleagă parcarea unde dorește utilizatorul să parcheze, astfel, proiectul este pregătit și pentru următorul pas.
+4. **Eficiența din punct de vedere volumetric**. 
+5. **Ideea noastră nu se rezumă doar la utilizarea publică**. Parcarea noastră este o soluție foarte bună pentru locurile de parcare din zonele cu blocuri sau cu case. În zonele rezidențiale, locatarii își pot adăposti autovehiculul în interiorul parcării private, acesta fiind complet izolat de factorii externi, de pericole precum hoți, fenomene naturale: zăpadă, iarna; căldură exagerată, vara etc. Datorită construcției sub pământ, parcarea noastră este capabilă să suporte toate aceste pericole, astfel, confortul este mult îmbunătățit. 
+
+## Construcția codului
+**Codul pe care l-am construit este împărțit în 3 secțiuni:**
+1. [Secțiunea embedded](../master/spark-embedded-master) (cea care se ocupă de controlarea părții fizice)
+2. [Secțiunea back-end](../master/spark-backend-master) (cea care se ocupă de tot ce înseamnă comunicarea cu server-ul și implicarea lui în procesele noastre)
+3. [Secțiunea front-end](../master/spark-frontend-master) (cea care se ocupă de [website-ul](academia.go.ro:8075) parcării)
+
+La pornirea proiectului, se urmăresc următorii pași:
+1. Inițializarea modulului, având următoarele componente:
+- Inițializarea pinilor
+- Stabilirea conexiunii Wi-Fi
+- Conectarea la server prin Web Sockets și înregistrarea parcării pe server prin informațiile acesteia (id, număr de locuri de parcare)
+2. Comunicarea cu server-ul, se face bidirecțional, prin websockets, prin tag-uri specifice fiecărei instrucțiuni. Pentru cercetare-dezvoltare, server-ul are control complet asupra funcționalității modulului de comandă, acesta prezentând api – endpoints și pentru funcții specifice, cum ar fi mișcarea motoarelor cu o anumită viteză sau la o anumită poziție. Server-ul are și rol în setarea parametrilor interni, cum ar fi distanța între locurile de parcare etc. Modulul de comandă va iniția comunicarea, în cazul prezenței unui nou card RFID, sau în cazul unei erori. Comenzile de la server la modul sunt următoarele:
+- `_spot x` - se cere prezentarea locului de parcare x. _În cazul în care există deja o cerere pentru această acțiune, aceasta se va adăuga în coada de cereri și va fi efectuată ulterior._
+- `_speed x` - motorul va începe să se învârtă cu viteza x
+- `_pos x` - cere deplasarea motorului la poziția x (poziția reprezentând contorul incrementat de encoder). _În cazul în care există deja o cerere pentru această acțiune, aceasta se va adăuga în coada de cereri și va fi efectuată ulterior._
+- `_get_status` - parcarea va furniza date despre starea acesteia (starea de mișcare, prezența persoanelor, locul actual de parcare prezentat etc.)
+- `_get_info` - parcarea va furniza informații generale despre aceasta (id, număr de locuri de parcare, distanța dintre locuri etc.)
+- `_set_dist x`, `_set_offset x`, `_set_crt x` setează parametrii interni ai modulului.
+3. Al doilea task este cel de **monitorizare RFID**: Monitorizarea prezenței cardurilor RFID se face prin pooling (se verifică integritatea cardului, pe server). O dată pe secundă se verifică prezența unui nou card. În cazul în care a fost detectat un astfel de card, se va trimite un mesaj adecvat către server pentru validarea ID-ului.
+4. Al treilea task se ocupă de controlul mișcării. Acesta va monitoriza cozile de comandă: coada de poziții (pentru depanare și cercetare) și coada principală, în care sunt memorate locurile de parcare dorite pentru a fi prezentate. Cât timp cozile nu sunt goale, se va lua următoarea cererea și se a acționa motorul, prin Pulse Width Modulation, pentru rezolvarea acestora.
+5. Citirea endoder-ului. Pentru citirea encoder-ului rotativ, s-a atașat o funcție de întrerupere pe pinii conectați la acesta care, la schimbarea valorilor, verifică direcția de deplasare și crește sau scade un contor global.
+
+Website-ul comunică tot prin server cu celelalte module prezente. Pe pagina acestuia se poate insera un număr de telefon (care este verificat să aibă minim 10 caractere) și, în viitor, se dorește implementarea unui drop-down list cu id-urile parcărilor, pentru posibilitatea selectării unei parcări dorite, din listă. Acesta permite și vizualizarea locurilor de parcare libere, pentru eficientizarea timpului de așteptare.
+![Website](../master/extra/website.png)
+
 
 ## Bibliografie
