@@ -1,0 +1,24 @@
+{
+  "name": "subparking-server",
+  "version": "1.0.0",
+  "description": "server for smart parking",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/mitelsoft/subparking-server.git"
+  },
+  "author": "mitel",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mitelsoft/subparking-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.js": "^0.1.4",
+    "ws": "^7.2.1"
+  }
+}
