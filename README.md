@@ -1,23 +1,31 @@
-# SmartPark
-## Abstract - Utilitate practică
-În zilele noastre, numărul mașinilor crește exponențial, problema locurilor de parcare în orașe devenind din ce în ce mai critică. Una dintre modalitațile de rezolvare a acestei problme este construirea de locuri de parcare, cu toate acestea, pe toți ne deranjează clădirile imense din mijlocul orașelor, a căror scop este numai adăpostirea mașinilor. Dificultațile pe care le prezintă solțiile sctuale sunt costurile mari, necesitatea de spații mari, ineficența din punct de vedere al gestionării cursului mașinilor, din cauza necesității spațiului de manevră, și nu în ultimul rând, aspectul și imposibilitatea integrării în ansamblul arhitectural al zonei în care sunt amplasate, în special în centrele istorice si arhitecturale.
+# S-Park
+![banner](../master/extra/banner.png)
+#### Acest repository de Github reprezintă prezentarea conceptului și a robotului S-Park, al cărui scop este de a rezolva problema locurilor de parcare din orașele aglomerate, care au deja o infrastructură stabilită, și unde este mult mai complicată construirea de clădiri noi, cu scopul adăpostirii autovehiculelor.
+## Cuprins:
+- [Argument - Utilitate practică](#argument---utilitate-practică)
+- [Partea mecanică](#partea-mecanică)
+- [Partea electronică](#partea-electronică)
+- [Avantaje](#avantaje)
+- [Construcția codului - Software](#construcția-codului---software)
+## Argument - Utilitate practică
+În zilele noastre, numărul mașinilor crește exponențial, problema locurilor de parcare în orașe devenind din ce în ce mai critică. Una dintre modalitațile de rezolvare a acestei problme este construirea de locuri de parcare, cu toate acestea, pe toți ne deranjează clădirile imense din mijlocul orașelor, a căror scop este numai adăpostirea mașinilor. Dificultațile pe care le prezintă soluțiile sctuale sunt costurile mari, necesitatea de spații voluminoase, ineficența din punct de vedere al gestionării cursului mașinilor, din cauza necesității spațiului de manevră, și nu în ultimul rând, aspectul și imposibilitatea integrării în ansamblul arhitectural al zonei în care sunt amplasate, în special în centrele istorice si arhitecturale.
 
- Astfel, proiectul prezentat face parte dintr-unul mai larg,încearcând să rezolve problemele prezentate, prin dezvoltarea unei parcări inteligente, subterane, modulare, de tip carusel, eficientă din punct de vedere al spațiului utilizat, al costului și al timpului de construcție, putând fi cu ușurință integrată în orice spațiu arhitectural.
+ Astfel, proiectul prezentat face parte dintr-unul mai larg, încearcând să rezolve problemele prezentate, prin dezvoltarea unei parcări inteligente, subterane, modulare, de tip carusel, eficiente din punct de vedere al spațiului utilizat, al costului și al timpului de construcție, putând fi cu ușurință integrată în orice spațiu arhitectural.
 
 ## Partea mecanică
 
-Ideea noastră a pornit de la un concept deja existent, numit Rotary Parking, însă noi l-am adaptat renunțând la roata dințată din partea superioară, care bloca accesul masinilor atunci cand vehiculele intrau prin partea de sus. Astfel, am ajuns sa creăm o parcare cu o cupolă unde am amplasat o serie de role pe care lanțurile gondolelor alunecă.
+Ideea noastră a pornit de la un concept deja existent, numit Rotary Parking, însă noi l-am adaptat renunțând la roata dințată din partea superioară, care bloca accesul mașinilor atunci cand vehiculele intrau prin partea de sus. Astfel, am ajuns sa realizăm o parcare cu o cupolă unde am amplasat o serie de role pe care lanțurile gondolelor alunecă. Mai mult decât atât, parcarea noastră este **subterană**, spre deosebire de Rotary Parking, care este supraterană.
 
-Capacul cutiei reprezintă nivelul solului, adică nivelul de la care mașinile încep coborârea catre subteran. În interiorul cutiei se află gondolele, placa de dezvoltare ESP32, driver-ul de motor, cititorul de carduri RFID și motorul care învârte mecanismul. De acesta sunt atârnate 8 gondole (locuri de parcare). Ele sunt acționate de o roată dințată, în partea inferioară iar în partea superioară, se află cupola care elimină nevoia de a avea o a 2-a roata dințată, așa cum se prezintă conceptul Rotary Parking, permițând, astfel, intrarea mașinilor prin partea superioară a sistemului. 
+Capacul cutiei reprezintă nivelul solului, adică nivelul de la care mașinile încep coborârea catre subteran. În interiorul cutiei se află gondolele, placa de dezvoltare ESP32, driver-ul de motor, cititorul de carduri RFID și motorul DC care învârte mecanismul. De acesta sunt atârnate 8 gondole (locuri de parcare). Ele sunt acționate de o roată dințată, în partea inferioară iar în partea superioară se află cupola care elimină nevoia de a avea o a 2-a roata dințată, așa cum se prezintă conceptul Rotary Parking, permițând, astfel, intrarea mașinilor prin partea superioară a sistemului. 
 
 În proiectul nostru, placa de dezvoltare ESP32 are 3 funcții principale: comunicarea cu cititorul de carduri, acționarea motorului și determinarea poziției actuale a locului de parcare. Placa comunică cu server-ul și îi trimite informații pentru a afișa pe aplicație date importante, cum ar fi numărul de locuri libere.
 
-Sursele de energie pot varia, datorită ușurinței implementării proiectului, astfel, surse de energie regenerabile, precum energia solară sau eoliană, pot fi folosite, mai ales când acestea sunt în abundența. Desigur, acestea ar trebui să aibă o rezervă de energie, în cazurile excepționale, pentru a renunța la riscul blocării vreunei mașini din cauza lipsei de curent.
+Sursele de energie pot varia, datorită ușurinței implementării proiectului, astfel, surse de energie regenerabilă, precum energia solară sau eoliană, pot fi folosite, mai ales când acestea sunt prezente în abundența. Desigur, acestea ar trebui să aibă o sursă  de rezervă de energie, în cazurile excepționale, pentru a elimina riscul blocării vreunei mașini, din cauza lipsei de curent.
 
 ### <u>Modul de funcționare</u>
 Proiectul nostru are 3 părți principale:
 - Interfața cu utilizatorii, prin intermediul unui modul RFID și prin aplicația web
-- Interfața cu serverul, prin websockets
+- Interfața cu server-ul, prin Web Sockets
 - Comanda motorului 
 
 Utilizatorilor li se vor pune la dispoziție două modalități de interacțiune cu parcarea: 
@@ -28,7 +36,7 @@ Prima, **fizică**, prin intermediul cardurilor RFID, iar a doua, **virtuală**,
 
 În ambele cazuri, după validarea datelor, parcarea va pune la dispoziție următorul loc liber.
 
-Revendicarea mașinii se va face într-un mod similar: persoana va accesa parcarea prin card sau aplicație, serverul va valida datele, iar în cazul acesta, parcarea va aduce la dispoziția utilizatorului mașina parcată de acesta. După revendicare, va rămâne în aceeași poziție, oferind locul eliberat următoarei persoane.
+Revendicarea mașinii se va face într-un mod similar: persoana va accesa parcarea prin card sau aplicație, server-ul va valida datele, iar în cazul acesta, parcarea va aduce la dispoziția utilizatorului mașina parcată de acesta. După revendicare, va rămâne în aceeași poziție, oferind locul eliberat următoarei persoane.
 
 În cazul în care mai multe persoane încearcă revendicarea mașinilor în același timp, aceste cereri for fi plasate într-o **coadă** și vor fi procesate pe rând.
 
@@ -55,14 +63,14 @@ Pentru partea electrică am utilizat elementele prezentate în schema de mai jos
 
 ![electrical_scheme](../master/spark-embedded-master/electrica.png)
 
-- Am folosit microcontroller-ul ESP32, deoarece aveam nevoie de o eficiență sporită a programului, dar și datorită capabilității sale de conectare prin Wi-Fi. Puteam folosi și un Raspberry Pi, însă acesta era mult mai ineficient, de aceea ne-am rezumat la placa [NodeMCU-32S](https://www.waveshare.com/nodemcu-32s.htm).
-- Pentru a permite utilizarea cardurilor RFID, am avut nevoie de un modul [RFID-RC522](https://www.optimusdigital.ro/en/wireless-rfid/67-mfrc522-rfid-module.html). Acesta a putut fi implementat foarte ușor, adăugând astfel o utilitate în plus proiectului.
+- Am folosit microcontroller-ul ESP32, deoarece aveam nevoie de o eficiență sporită a programului, dar și datorită capabilității sale de conectare prin Wi-Fi. Puteam folosi și un Raspberry Pi, însă acesta era mult mai încet, de aceea ne-am rezumat la placa [NodeMCU-32S](https://www.waveshare.com/nodemcu-32s.htm).
+- Pentru a permite utilizarea cardurilor RFID, am avut nevoie de un modul [RFID-RC522](https://www.optimusdigital.ro/en/wireless-rfid/67-mfrc522-rfid-module.html). Acesta a putut fi implementat cu ușurință, adăugând astfel o utilitate în plus proiectului.
 - Pentru punerea în mișcare a parcării, am folosit un [motor DC](https://www.aliexpress.com/item/32846235423.html) și un driver de motor cu punte H: [L298N](https://www.optimusdigital.ro/en/brushed-motor-drivers/145-l298n-dual-motor-driver.html), deoarece doream să controlăm cât de rapid și cât de mult să se învârtă acesta.
 - Sursa de alimentare este compusă din 2 baterii Li-Ion de 3.7 V, care împreună ne oferă 6-9 V, putere suficientă pentru alimentarea proiectului.
 
-În continuare, luăm în considerare și server-ul cu care microcontroller-ul comunică, acesta fiind conectat prin Wi-Fi la server.
+În continuare, luăm în considerare și server-ul cu care microcontroller-ul comunică, acesta fiind conectat prin Wi-Fi.
 
-Folosim encoder-ul magnetic pentru a determina cât de mult s-a învârtit motorul, astfel, putem calcula distanța dintre locurile de parcare și să îi spunem motorului precis cât de tare să se învârte, pentru prezentarea următorului loc de parcare.
+Folosim encoder-ul magnetic pentru a determina cât de mult s-a învârtit motorul, astfel, putem calcula distanța dintre locurile de parcare și să îi spunem motorului, precis, cât de tare să se învârtă, pentru prezentarea următorului loc de parcare.
 
 Parcarea noastră este complet autonomă și nu necesită decât acționarea acesteia prin aplicație sau prin apropierea unui card RFID.
 
@@ -70,22 +78,22 @@ Parcarea noastră este complet autonomă și nu necesită decât acționarea ace
 
 Conceptul prezentat de noi oferă o mulțime de avantaje, printre care se numără:
 
-1. **Prețul redus al unui loc de parcare**. În mod normal, costul unui loc de parcare în subteran începe de la 23.000€, însă un spațiu în parcarea noastră costă doar 15.000-18.000€, un preț mult mai avantajos
-2. **Confortul vizual și integrarea aproape inobservabilă a parcării**. Datorită conceptului de parcare tip carusel, parcarea noastră se comportă ca un lift subteran, partea supraterană fiind mult mai redusă ca dimensiune, astfel, aceasta poate fi integrată oriunde, în orice stil arhitectural.
-3. **Conceptul dezvoltat în prezent poate fi integrat pentru mai multe pracări**. Cu siguranță vor exista mai multe parcări de acest gen, de aceea noi am scris codul în așa fel încât există posibilitatea din aplicația web să se aleagă parcarea unde dorește utilizatorul să parcheze, astfel, proiectul este pregătit și pentru următorul pas.
-4. **Eficiența din punct de vedere volumetric**. 
-5. **Ideea noastră nu se rezumă doar la utilizarea publică**. Parcarea noastră este o soluție foarte bună pentru locurile de parcare din zonele cu blocuri sau cu case. În zonele rezidențiale, locatarii își pot adăposti autovehiculul în interiorul parcării private, acesta fiind complet izolat de factorii externi, de pericole precum hoți, fenomene naturale: zăpadă, iarna; căldură exagerată, vara etc. Datorită construcției sub pământ, parcarea noastră este capabilă să suporte toate aceste pericole, astfel, confortul este mult îmbunătățit. 
+1. **Prețul redus al unui loc de parcare**. În mod normal, costul unui loc de parcare în subteran începe de la 23.000€, însă un spațiu existent în parcarea noastră costă doar 15.000-18.000€, un preț mult mai avantajos.
+2. **Confortul vizual și integrarea aproape inobservabilă a parcării**. Datorită conceptului de parcare de tip carusel, parcarea noastră se comportă ca un lift subteran, partea supraterană fiind mult mai redusă ca dimensiune decât metodele existente, astfel, aceasta putând fi integrată oriunde, în orice stil arhitectural.
+3. **Conceptul dezvoltat în prezent poate fi integrat pentru mai multe pracări**. Cu siguranță vor exista mai multe parcări de acest gen, de aceea noi am scris codul în așa fel încât există posibilitatea din aplicația web să se aleagă parcarea unde dorește utilizatorul să parcheze, astfel, proiectul este pregătit și pentru un viitor pas înainte.
+4. **Eficiența din punct de vedere volumetric**. Spațiul necesar pentru construirea unui loc de parcare de tip S-Park ocupă jumătate din spațiul necesar unui loc obișnuit, deoarece, în cazul proiectului nostru, nu este deloc necesară proiectarea unui spațiu de manevră pentru autovehicule, acestea fiind ușor fixate pe locul de parcare. 
+5. **Ideea noastră nu se rezumă doar la utilizarea publică**. Parcarea noastră este o soluție foarte bună și pentru locurile de parcare din zonele cu blocuri sau case. În zonele rezidențiale, locatarii își pot adăposti autovehiculul în interiorul parcării private, acesta fiind complet izolat de factorii externi, de pericole precum hoți, fenomene naturale: zăpadă, iarna; căldură exagerată, vara etc. Datorită construcției sub pământ, parcarea noastră este capabilă să suporte toate aceste primejdii, confortul fiind mult îmbunătățit. 
 
 ## Construcția codului - Software
 Limbajele de programare folosite au fost: C standard (utilizat pentru controlul părții fizice a robotului), Javascript (pentru back-end și front-end (script-uri pentru trimiterea informațiilor către server))
 
 Pentru partea se server, s-a folosit Node.js, cu modulele WS.
 
-Pentru C, am folosit modulele: _espressif-SDK_, _FreeRTOS_ și biblioteca _"mfrc522.h"_
+Pentru C am folosit modulele: _espressif-SDK_, _FreeRTOS_ și biblioteca _"mfrc522.h"_
 
 **Codul pe care l-am construit este împărțit în 3 secțiuni:**
 1. [Secțiunea embedded](../master/spark-embedded-master) (cea care se ocupă de controlarea părții fizice)
-2. [Secțiunea back-end](../master/spark-backend-master) (cea care se ocupă de tot ce înseamnă comunicarea cu server-ul și implicarea lui în procesele noastre)
+2. [Secțiunea back-end](../master/spark-backend-master) (cea care se ocupă de tot ceea ce înseamnă comunicarea cu server-ul și implicarea lui în procesele noastre)
 3. [Secțiunea front-end](../master/spark-frontend-master) (cea care se ocupă de [website-ul](academia.go.ro:8075) parcării)
 
 La pornirea proiectului, se urmăresc următorii pași:
@@ -93,7 +101,7 @@ La pornirea proiectului, se urmăresc următorii pași:
 - Inițializarea pinilor
 - Stabilirea conexiunii Wi-Fi
 - Conectarea la server prin Web Sockets și înregistrarea parcării pe server prin informațiile acesteia (id, număr de locuri de parcare)
-2. Comunicarea cu server-ul, se face bidirecțional, prin websockets, prin tag-uri specifice fiecărei instrucțiuni. Pentru cercetare-dezvoltare, server-ul are control complet asupra funcționalității modulului de comandă, acesta prezentând api – endpoints și pentru funcții specifice, cum ar fi mișcarea motoarelor cu o anumită viteză sau la o anumită poziție. Server-ul are și rol în setarea parametrilor interni, cum ar fi distanța între locurile de parcare etc. Modulul de comandă va iniția comunicarea, în cazul prezenței unui nou card RFID, sau în cazul unei erori. Comenzile de la server la modul sunt următoarele:
+2. Comunicarea cu server-ul, se face bidirecțional, prin Web Sockets, prin tag-uri specifice fiecărei instrucțiuni. Pentru cercetare-dezvoltare, server-ul are control complet asupra funcționalității modulului de comandă, acesta prezentând api – endpoints și pentru funcții specifice, cum ar fi mișcarea motoarelor cu o anumită viteză sau la o anumită poziție. Server-ul are și rol în setarea parametrilor interni, cum ar fi distanța între locurile de parcare etc. Modulul de comandă va iniția comunicarea, în cazul prezenței unui nou card RFID, sau în cazul unei erori. Comenzile de la server la modul sunt următoarele:
 - `_spot x` - se cere prezentarea locului de parcare x. _În cazul în care există deja o cerere pentru această acțiune, aceasta se va adăuga în coada de cereri și va fi efectuată ulterior._
 - `_speed x` - motorul va începe să se învârtă cu viteza x
 - `_pos x` - cere deplasarea motorului la poziția x (poziția reprezentând contorul incrementat de encoder). _În cazul în care există deja o cerere pentru această acțiune, aceasta se va adăuga în coada de cereri și va fi efectuată ulterior._
