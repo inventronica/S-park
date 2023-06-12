@@ -17,5 +17,6 @@ Capacul cutiei reprezintă nivelul solului, adică nivelul de la care mașinile 
 ## Partea electrică
 
 ## Avantaje
+→Server →Utilizator →Administrator →Comunicarea cu alte parcari
 
 ## Partea de cod
