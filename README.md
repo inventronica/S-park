@@ -1,6 +1,9 @@
 # S-Park
 ![banner](../master/extra/banner.jpg)
-#### Acest repository de Github reprezintă prezentarea conceptului și a robotului S-Park, al cărui scop este de a rezolva problema locurilor de parcare din orașele aglomerate, care au deja o infrastructură stabilită, și unde este mult mai complicată construirea de clădiri noi, cu scopul adăpostirii autovehiculelor.
+#### Acest repository de Github reprezintă prezentarea conceptului și a robotului S-Park, al cărui scop este de a rezolva problema locurilor de parcare din orașele aglomerate, care au deja o infrastructură stabilită, și unde este mult mai complicată construirea unor clădiri noi, cu scopul adăpostirii autovehiculelor.
+Componența echipei:
+- David Ignat (clasa a X-a) - programator, responsabil embedded
+- Ștefan Giurgiu (clasa a VII-a) - responsabil partea mecanică și integrarea cu ESP32
 ## Cuprins:
 - [Argument - Utilitate practică](#argument---utilitate-practică)
 - [Partea mecanică](#partea-mecanică)
@@ -8,7 +11,7 @@
 - [Avantaje](#avantaje)
 - [Construcția codului - Software](#construcția-codului---software)
 ## Argument - Utilitate practică
-În zilele noastre, numărul mașinilor crește exponențial, problema locurilor de parcare în orașe devenind din ce în ce mai critică. Una dintre modalitațile de rezolvare a acestei problme este construirea de locuri de parcare, cu toate acestea, pe toți ne deranjează clădirile imense din mijlocul orașelor, a căror scop este numai adăpostirea mașinilor. Dificultațile pe care le prezintă soluțiile sctuale sunt costurile mari, necesitatea de spații voluminoase, ineficența din punct de vedere al gestionării cursului mașinilor, din cauza necesității spațiului de manevră, și nu în ultimul rând, aspectul și imposibilitatea integrării în ansamblul arhitectural al zonei în care sunt amplasate, în special în centrele istorice si arhitecturale.
+În zilele noastre, numărul mașinilor crește exponențial, problema locurilor de parcare în orașe devenind din ce în ce mai critică. Una dintre modalitațile de rezolvare a acestei problme este construirea mai multor locuri de parcare, cu toate acestea, pe toți ne deranjează clădirile imense din mijlocul orașelor, a căror scop este numai adăpostirea mașinilor. Dificultațile pe care le prezintă soluțiile sctuale sunt costurile mari, necesitatea de spații voluminoase, ineficența din punct de vedere al gestionării cursului mașinilor, din cauza necesității spațiului de manevră, și nu în ultimul rând, aspectul și imposibilitatea integrării în ansamblul arhitectural al zonei în care sunt amplasate, în special în centrele istorice si arhitecturale.
 
  Astfel, proiectul prezentat face parte dintr-unul mai larg, încearcând să rezolve problemele prezentate, prin dezvoltarea unei parcări inteligente, subterane, modulare, de tip carusel, eficiente din punct de vedere al spațiului utilizat, al costului și al timpului de construcție, putând fi cu ușurință integrată în orice spațiu arhitectural.
 
@@ -87,7 +90,7 @@ Conceptul prezentat de noi oferă o mulțime de avantaje, printre care se număr
 ## Construcția codului - Software
 Limbajele de programare folosite au fost: C standard (utilizat pentru controlul părții fizice a robotului), Javascript (pentru back-end și front-end (script-uri pentru trimiterea informațiilor către server))
 
-Pentru partea se server, s-a folosit Node.js, cu modulele WS.
+Pentru partea de server, s-a folosit Node.js, cu modulele WS.
 
 Pentru C am folosit modulele: _espressif-SDK_, _FreeRTOS_ și biblioteca _"mfrc522.h"_
 
